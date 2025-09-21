@@ -1,12 +1,29 @@
-# React + Vite
+# Bible Research Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite interface for the Bible Research project. The app now ships with a
+modern Firebase Authentication experience featuring a responsive login page and
+a minimal workspace shell.
 
-Currently, two official plugins are available:
+## Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install dependencies:
 
-## Expanding the ESLint configuration
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. Configure Firebase credentials by copying `.env.example` to `.env` and
+   supplying your Firebase web app configuration.
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Available scripts
+
+- `npm run dev` – Start the Vite development server.
+- `npm run build` – Create a production build.
+- `npm run lint` – Lint the project with ESLint.
+- `npm run preview` – Preview the production build locally.
