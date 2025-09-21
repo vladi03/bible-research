@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import LoginPage from './components/LoginPage'
 import MainPage from './components/MainPage'
-import { auth, isFirebaseConfigured } from './firebase'
+import { auth, firebaseConfigError, isFirebaseConfigured } from './firebase'
 import './App.css'
 
 function App() {
@@ -22,12 +22,14 @@ function App() {
     return unsubscribe
   }, [])
 
-  if (!isFirebaseConfigured) {
+  if (firebaseConfigError) {
     return (
       <div className="loading-screen">
         <span className="loading-copy">
-          Firebase is not configured. Update your environment variables to enable
-          authentication.
+          {firebaseConfigError}. Update your environment variables in <code>
+            .env
+          </code>{' '}
+          to enable authentication.
         </span>
       </div>
     )

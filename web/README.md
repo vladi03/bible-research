@@ -13,7 +13,8 @@ a minimal workspace shell.
    ```
 
 2. Configure Firebase credentials by copying `.env.example` to `.env` and
-   supplying your Firebase web app configuration.
+   supplying your Firebase web app configuration. At a minimum you must provide
+   the **API key** and **Auth domain** values from the Firebase console.
 
 3. Run the development server:
 
