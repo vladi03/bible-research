@@ -1,0 +1,20 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Bible Research app",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "deploy": "firebase deploy --config ../firebase.json --only functions",
+    "deploy:prod": "firebase deploy --config ../firebase.json --project bible-resaerch --only functions",
+    "deploy:dev": "firebase deploy --config ../firebase.json --project bible-resaerch-dev --only functions",
+    "lint": "echo \"No lint configured\""
+  },
+  "dependencies": {
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.4.0"
+  }
+}

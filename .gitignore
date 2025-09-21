@@ -1,0 +1,27 @@
+# General
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+
+# Firebase
+.firebase/
+
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+web/dist/
+functions/lib/
+
+# Vite cache
+web/.vite/
+
+# Local tooling
+.vscode/
+.idea/
