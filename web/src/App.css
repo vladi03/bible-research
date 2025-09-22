@@ -1,22 +1,40 @@
-.app {
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+}
+
+.loading-screen {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #1f2933;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  text-align: center;
+  gap: 1.5rem;
+  background: linear-gradient(140deg, #eef2ff 0%, #e0e7ff 40%, #ede9fe 100%);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  color: #312e81;
 }
 
-.app h1 {
-  margin: 0;
-  font-size: 3rem;
+.spinner {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 4px solid rgba(99, 102, 241, 0.25);
+  border-top-color: #6366f1;
+  animation: spin 1s linear infinite;
 }
 
-.app p {
-  margin: 0;
-  font-size: 1.2rem;
+.loading-copy {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
