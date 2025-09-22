@@ -12,6 +12,8 @@
     "deploy:dev": "npm run build && firebase deploy --config ../firebase.json --project bible-resaerch-dev --only hosting:bible-resaerch-dev"
   },
   "dependencies": {
+    "firebase": "^12.3.0",
+    "prop-types": "^15.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
