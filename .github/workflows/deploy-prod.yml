@@ -32,6 +32,13 @@ jobs:
         working-directory: web
         run: npm ci
 
+      - name: Materialize Firebase web env
+        working-directory: web
+        run: |
+          cat <<'EOF' > .env
+          ${{ secrets.FIREBASE_WEB_CONFIG_PROD }}
+          EOF
+
       - name: Build web app
         working-directory: web
         run: npm run build
@@ -42,3 +49,4 @@ jobs:
 
       - name: Deploy to Firebase (prod)
         run: firebase deploy --project "$GCLOUD_PROJECT" --only hosting,firestore,functions --config firebase.json
+
