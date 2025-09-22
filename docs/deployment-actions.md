@@ -57,3 +57,4 @@ Two workflows exist under `.github/workflows`:
   - Deploys Hosting, Firestore rules, and Functions to `bible-resaerch-dev`.
 
 Both workflows share the same structure and use the secrets defined above. Adjust the triggers or `--only` flags if the deployment policy changes.
+
