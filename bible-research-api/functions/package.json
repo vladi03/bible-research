@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "description": "Cloud Functions for Bible Buddy API v2",
+  "type": "module",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "serve-dev": "firebase use dev && firebase emulators:start --only functions",
+    "serve-prod": "firebase use prod && firebase emulators:start --only functions",
+    "serve-email-functions": "firebase emulators:start --only functions:email-functions",
+    "serve-notification-functions": "firebase emulators:start --only functions:notification-functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase use dev && firebase deploy --only functions",
+    "deploy-prod": "firebase use prod && firebase deploy --only functions",
+    "deploy-email": "firebase use dev && firebase deploy --only functions:email-functions",
+    "deploy-notification": "firebase use dev && firebase deploy --only functions:notification-functions",
+    "logs": "firebase functions:log",
+    "test": "jest",
+    "updateIndexes": "node ./scripts/firestoreIndexes.js",
+    "bulkUpdateBibleData": "node ./scripts/bulkUpdateBibleData.js",
+    "importBibleData": "node ./scripts/importBibleData.js",
+    "uploadImages": "node ./scripts/uploadImagesAndUpdateBibleData.js"
+  },
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.3.2",
+    "google-auth-library": "^9.14.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "jest": "^29.7.0"
+  }
+} 
