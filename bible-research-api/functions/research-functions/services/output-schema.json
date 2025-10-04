@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/thai-bible-structure.schema.json",
+  "title": "Thai Bible Commentary Structure",
+  "description": "Schema for structured verse and section commentary data for a Bible study application.",
+  "type": "object",
+  "properties": {
+    "verses": {
+      "type": "array",
+      "description": "Individual verse-level data including translations, context, and AI-generated commentary.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sectionId": {
+            "type": "string",
+            "description": "Unique identifier linking the verse to a section commentary."
+          },
+          "context": {
+            "type": "array",
+            "description": "Contextual information about the verse (setting, background, etc.).",
+            "items": {
+              "type": "object",
+              "properties": {
+                "body": { "type": "string", "description": "Main contextual explanation." },
+                "contextType": {
+                  "type": "string",
+                  "enum": ["setting", "theme", "historical", "linguistic", "literary"],
+                  "description": "Type of contextual note provided."
+                },
+                "title": { "type": "string", "description": "Title or short label for this context." }
+              },
+              "required": ["body", "contextType", "title"]
+            }
+          },
+          "parallelTranslations": {
+            "type": "object",
+            "description": "Multiple Bible translations for comparison.",
+            "properties": {
+              "esv": { "type": "string" },
+              "nasb": { "type": "string" },
+              "kjv": { "type": "string" }
+            },
+            "required": ["esv"]
+          },
+          "verseCitation": { "type": "string", "description": "Full citation of the verse (e.g., 'John 1:1')." },
+          "book": { "type": "string" },
+          "chapter": { "type": "string" },
+          "verse": { "type": "string" },
+          "originalWords": {
+            "type": "array",
+            "description": "Original-language terms used in the verse with definitions and significance.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "description": "Strong's concordance ID (e.g., 'G1722')." },
+                "originalWord": { "type": "string", "description": "Greek or Hebrew term." },
+                "definitionSort": { "type": "string", "description": "Short lexical gloss or definition." },
+                "relevanceScore": { "type": "integer", "minimum": 0, "maximum": 10 },
+                "whyRelevant": { "type": "string", "description": "Explanation of theological or exegetical relevance." }
+              },
+              "required": ["id", "originalWord"]
+            }
+          },
+          "verseCrossRef": {
+            "type": "array",
+            "description": "Cross-referenced Bible verses connected to this verse.",
+            "items": { "type": "string", "pattern": "^[A-Za-z ]+\\s\\d+:\\d+$" }
+          },
+          "aiCommentaries": {
+            "type": "array",
+            "description": "AI-generated commentaries written in different theological 'voices'.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "description": "Name of commentary voice (e.g., 'Voice of Spurgeon')." },
+                "title": { "type": "string", "description": "Title of the commentary section." },
+                "comment": { "type": "string", "description": "Main commentary text." }
+              },
+              "required": ["name", "comment"]
+            }
+          }
+        },
+        "required": ["sectionId", "verseCitation", "book", "chapter", "verse"]
+      }
+    },
+    "sectionCommentaries": {
+      "type": "array",
+      "description": "Section-level commentaries summarizing grouped verses by theme or narrative.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "Unique section ID." },
+          "title": { "type": "string", "description": "Section title summarizing the theme." },
+          "versesInTheGroup": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[A-Za-z ]+\\s\\d+:\\d+$" }
+          },
+          "theologicalPerspective": {
+            "type": "string",
+            "description": "Doctrinal or theological reflection on the section."
+          },
+          "pastoralPerspective": {
+            "type": "string",
+            "description": "Practical or devotional reflection aimed at pastoral application."
+          },
+          "literalPerspective": {
+            "type": "string",
+            "description": "Literal or narrative explanation of the events or statements."
+          }
+        },
+        "required": ["id", "title", "versesInTheGroup"]
+      }
+    },
+    "pageNumber": { "type": "integer", "minimum": 1, "description": "Current page index in pagination." },
+    "book": { "type": "string", "description": "Book of the Bible (e.g., 'John')." },
+    "pageCount": { "type": "integer", "minimum": 1, "description": "Total number of pages for this book's commentary set." }
+  },
+  "required": ["verses", "sectionCommentaries", "book"]
+}
