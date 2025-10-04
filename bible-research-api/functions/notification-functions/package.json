@@ -1,0 +1,28 @@
+{
+  "name": "notification-functions",
+  "version": "1.0.0",
+  "description": "Notification Functions for Bible Buddy API v2",
+  "type": "module",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions:notification-functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions:notification-functions",
+    "deploy-prod": "firebase use prod && firebase deploy --only functions:notification-functions",
+    "logs": "firebase functions:log",
+    "test": "jest"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.3.2"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "jest": "^29.7.0"
+  },
+  "private": true
+} 
