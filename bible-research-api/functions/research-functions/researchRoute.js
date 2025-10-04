@@ -21,7 +21,7 @@ export const verse = onRequest({timeoutSeconds: 540},
             const { book, pageNumber } = request.body;
             try {
 
-                response.send(await placeholderService());
+                response.send({data:await placeholderService(), pageNumber:1, book:book});
             } catch (error) {
                 console.error('Error sending email:', error);
                 response.status(500).send({ error: 'Failed to send email' });
