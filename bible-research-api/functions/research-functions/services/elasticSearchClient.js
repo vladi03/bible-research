@@ -443,7 +443,7 @@ export async function fetchVerseAndSectionData(versesList, options = {}) {
       verse: result.verse?.raw ?? null,
       context: parseContext(result.context?.raw),
       aiCommentaries: parseJsonArray(result.ai_commentaries?.raw ?? []),
-      originalWords: parseJsonArray(result.original_words?.raw ?? []),
+      originalWords: normalizeOriginalWords(parseJsonArray(result.original_words?.raw ?? [])),
       parallelTranslations: parseJsonArray(result.parallel_translations?.raw ?? []),
       sectionId: result.section_id?.raw ?? null
     }))
@@ -461,4 +461,49 @@ export async function fetchVerseAndSectionData(versesList, options = {}) {
     .sort((a, b) => compareSectionsUsingOrderMap(a, b, verseOrderMap));
 
   return { verses, sectionCommentaries };
+}
+
+function normalizeOriginalWords(raw) {
+  if (!Array.isArray(raw)) {
+    return [];
+  }
+
+  return raw
+    .map((entry) => {
+      if (!entry || typeof entry !== 'object') {
+        return null;
+      }
+
+      const id = entry.id ?? null;
+      const originalWord = entry.originalWord ?? entry.original_word ?? null;
+      const definitionSort = entry.definitionSort ?? entry.definition_sort ?? null;
+      const relevance = entry.relevanceScore ?? entry.relevance_score ?? null;
+      const whyRelevant = entry.whyRelevant ?? entry.why_relevant ?? null;
+
+      const normalizedEntry = {};
+
+      if (id !== null && id !== undefined) {
+        normalizedEntry.id = String(id);
+      }
+
+      if (originalWord !== null && originalWord !== undefined) {
+        normalizedEntry.originalWord = String(originalWord);
+      }
+
+      if (definitionSort !== null && definitionSort !== undefined) {
+        normalizedEntry.definitionSort = String(definitionSort);
+      }
+
+      if (relevance !== null && relevance !== undefined) {
+        const numeric = Number(relevance);
+        normalizedEntry.relevanceScore = Number.isFinite(numeric) ? numeric : relevance;
+      }
+
+      if (whyRelevant !== null && whyRelevant !== undefined) {
+        normalizedEntry.whyRelevant = String(whyRelevant);
+      }
+
+      return Object.keys(normalizedEntry).length > 0 ? normalizedEntry : null;
+    })
+    .filter((entry) => entry !== null && entry.relevanceScore > 0);
 }
