@@ -20,8 +20,14 @@ export const verse = onRequest({timeoutSeconds: 540},
         await cors(request, response, async () => {
             const { book, pageNumber } = request.body;
             try {
-
-                response.send({data:await placeholderService(), pageNumber:1, book:book});
+                const serviceData = await placeholderService(pageNumber);
+                response.send({
+                    verses: serviceData.verses,
+                    sectionCommentaries: serviceData.sectionCommentaries,
+                    pageNumber: pageNumber,
+                    pageCount:10,
+                    book: book
+                });
             } catch (error) {
                 console.error('Error sending email:', error);
                 response.status(500).send({ error: 'Failed to send email' });
